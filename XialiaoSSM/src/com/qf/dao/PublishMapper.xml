@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qf.dao.PublishMapper">
+	<select id="getAllPublish" resultType="Publish">
+		select * from publish
+	</select>
+	
+	<select id="getNickPublish" resultType="Publish" parameterType="String">
+		select * from publish where nickname=#{nickname}
+	</select>
+	
+	<delete id="deletePublish" parameterType="String">
+		delete from publish where sign=#{sign}
+	</delete>
+	
+	<delete id="publishServlet" parameterType="Publish">
+		insert into publish(date,nickname,content_txt,content_img,sign) values(#{date},#{nickname},#{content_txt},#{content_img},#{sign})
+	</delete>
+	
+</mapper>

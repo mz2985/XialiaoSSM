@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qf.dao.UserMapper">
+	<!--实现接口    select操作   id实现的接口  resultType返回类型  parameterType参数类型-->
+	<select id="userLogin" resultType="User" parameterType="User">
+		select id,username,nickname,icon from user where username=#{username} and password=#{password}
+	</select>
+
+	<select id="checkRegisterUser" resultType="User" parameterType="String">
+		select id,username,nickname,icon from user where username=#{username}
+	</select>
+
+	<insert id="userRegister" parameterType="User">
+		insert into user(username,password,nickname) values(#{username},#{password},#{nickname})
+	</insert>
+
+
+</mapper>
+
