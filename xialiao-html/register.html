@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/main.css"/>
+	</head>
+	<body>
+		<img src="img/logo.png" class="logo" >
+		<input type="text" name="nickname" id="nickname" placeholder="昵称" />
+		<input type="text" name="username" id="username" placeholder="QQ号/手机号/邮箱" />
+		<input type="password" name="password" id="password" placeholder="密码" />
+		<input type="password" name="repassword" id="repassword" placeholder="重复密码" />
+		<button type="button" class="register" id="register">注册</button>
+	</body>
+	<script src="js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/ajax.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var register = document.getElementById("register");
+		register.onclick = function(){
+			var nickname = document.getElementById("nickname").value;
+			var username = document.getElementById("username").value;
+			var password = document.getElementById("password").value;
+			var repassword = document.getElementById("repassword").value;
+			
+			if(nickname==""||username==""||password==""){
+				return alert("昵称，用户名或密码不能为空");
+			}
+			if(password != repassword){
+				return alert("两次密码不一致");
+			}
+			
+			var url = "userRegister";
+			var method = "POST";
+			var data = {
+				"nickname":nickname,
+				"username":username,
+				"password":password
+			};
+			var dataType = "text";
+			
+			xmlHttpRequest(url,method,data,dataType,registerSuccess);
+		
+		}
+		
+		function registerSuccess(data){
+			switch(data){
+				case "checked":
+					alert("该用户已存在");
+					break;
+				case "success":
+					alert("注册成功");
+					window.location.href = "login.html";
+					break;
+				default:
+					alert("注册失败");
+					break;
+			}
+		}
+		
+	</script>
+</html>

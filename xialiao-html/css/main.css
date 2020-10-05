@@ -1,0 +1,63 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+html{
+	/* 
+	 calc 在css中做算法运算的
+	 vw 屏幕大小 分成100/3.75
+	 1px/100px = 0.01rem
+	 */
+	font-size: calc(100vw/3.75);
+}
+body{
+	/* 弹性布局 */
+	display: flex;
+	/* 盒子排列方式 */
+	flex-direction: column;
+	/* 使内部的子标签水平居中 */
+	align-items: center;
+}
+.logo{
+	width: 3rem;
+}
+
+input{
+	border-top: transparent;
+	border-left: transparent;
+	border-right: transparent;
+	/* 0.02边框宽度  solid实线  royalblue边框颜色 */
+	border-bottom: 0.02rem solid royalblue;
+	width: 2.5rem;
+	height: 0.4rem;
+	margin-bottom: 0.2rem;
+	font-size: 0.2rem;
+	text-align: center;
+}
+
+button{
+	width: 2.55rem;
+	height: 0.4rem;
+	font-size: 0.2rem;
+	color: white;
+	background-color: royalblue;
+	/* 圆角 */
+	border-radius: 0.05rem;
+	margin-top: 0.5rem;
+}
+
+a{
+	font-size: 0.16rem;
+	color: royalblue;
+	/* 绝对定位 如果父级元素无定位属性 想放哪就放哪  如果父级元素有定位属性 相对于父级元素 */
+	position: absolute;
+	bottom: 0.2rem;
+	text-decoration: none;
+}
+.nth-password{
+	left: 0.2rem;
+}
+.new-user{
+	right: 0.2rem;
+}

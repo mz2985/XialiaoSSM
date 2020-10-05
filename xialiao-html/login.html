@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/main.css"/>
+	</head>
+	<body>
+		<img src="img/logo.png" class="logo" >
+		<input type="text" name="username" id="username" placeholder="QQ号/手机号/邮箱" />
+		<input type="password" name="password" id="password" placeholder="密码" />
+		<button type="button" class="login" id="login">登录</button>
+		<a class="nth-password">找回密码</a>
+		<a href="register.html" class="new-user">注册</a>
+	</body>
+	<script src="js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/ajax.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var login = document.getElementById("login");
+		login.onclick = function(){
+			var username = document.getElementById("username").value;
+			var password = document.getElementById("password").value;
+			if(username=="" || password==""){
+				return alert("用户名密码不能为空");
+			}
+			
+			var url = "userLogin";
+			var method = "GET";
+			var data = {
+				"username":username,
+				"password":password
+			};
+			var dataType = "json";
+			
+			xmlHttpRequest(url,method,data,dataType,loginSuccess);
+			
+		}
+		
+		
+		function loginSuccess(data){
+			if(data.length==0){
+				alert("用户名或密码错误");
+			}else{
+				alert("登录成功");
+				// 本地的session存储
+				sessionStorage.setItem("nickname",data[0].nickname);
+				window.location.href="home.html";
+			}
+		}
+		
+	</script>
+</html>

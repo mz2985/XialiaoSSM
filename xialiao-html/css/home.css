@@ -1,0 +1,161 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+html{
+	font-size: calc(100vw/3.75);
+}
+body{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.head{
+	display: flex;
+	align-items: flex-start;
+	width: 100%;
+	height: 1.8rem;
+	background: url(../img/back.jpg) no-repeat center;
+	/* 背景尺寸 */
+	background-size: 100%;
+	/* 相对定位 */
+	position: relative;
+}
+.head .logout{
+	width: 0.6rem;
+	font-size: 0.15rem;
+	position: absolute;
+	left: 50%;
+	margin-left: -0.3rem;
+	top: 0.2rem;
+	border-bottom: 0.03rem solid black;
+}
+.head .user-icon{
+	width: 0.7rem;
+	height: 0.7rem;
+	margin-top: 0.5rem;
+	margin-left: 0.2rem;
+	border-radius: 50%;
+	border: 0.02rem solid white;
+}
+.head .nickname{
+	font-size: 0.18rem;
+	color: white;
+	margin-top: 0.8rem;
+	margin-left: 0.2rem;
+	border-bottom: 0.02rem solid white;
+}
+.head .navigation{
+	width: 100%;
+	height: 0.3rem;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	background: rgba(0,0,0,0.5);
+	display: flex;
+	flex-direction: row;
+	line-height: 0.3rem;
+}
+.head .navigation a{
+	flex: 1;
+	text-align: center;
+	font-size: 0.17rem;
+	color: white;
+}
+.on{
+	background-color: royalblue;
+}
+
+.fart{
+	margin: 3%;
+	width: 94%;
+	display: flex;
+	flex-direction: column;
+	font-size: 0.2rem;
+	box-sizing: border-box;
+}
+.fart .fart-content{
+	width: 100%;
+	height: 3.7rem;
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;
+	margin-bottom: 0.2rem;
+	background-color: whitesmoke;
+	position: relative;
+}
+.fart .fart-content .fart-content-user{
+	width: 100%;
+	height: 0.7rem;
+	display: flex;
+	flex-direction: row;
+	/* background-color: red; */
+}
+.fart .fart-content .fart-content-user .fart-content-user-icon{
+	width: 0.5rem;
+	height: 0.5rem;
+	border-radius: 50%;
+	margin: 0.1rem 0 0 0.1rem;
+}
+
+.fart-content-user div{
+	height: 100%;
+	margin-left: 0.3rem;
+}
+
+.fart-content-user div .fart-content-user-name{
+	height: 0.45rem;
+	font-size: 0.15rem;
+	font-weight: bolder;
+	line-height: 0.45rem;
+	color: royalblue;
+}
+.fart-content-user div .fart-content-user-date{
+	height: 0.25rem;
+	font-size: 0.1rem;
+	font-weight: bolder;
+	line-height: 0.25rem;
+	color: royalblue;
+}
+.fart-content-publish{
+	width: 100%;
+	height: 2.8rem;
+}
+.fart-content-publish p{
+	height: 0.8rem;
+	border-top: 0.02rem solid black;
+	padding: 0.05rem 0.05rem 0.05rem 0.2rem;
+	font-size: 0.2;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+.fart-content-publish img{
+	width: 90%;
+	height: 1.7rem;
+	margin-left: 4%;
+	margin-top: 0.1rem;
+	border: 0.05rem solid white;
+}
+#delete{
+	width: 0.25rem;
+	height: 0.25rem;
+	background: royalblue;
+	position: absolute;
+	right: 0.1rem;
+	top: 0.1rem;
+	font-weight: bolder;
+	text-align: center;
+	line-height: 0.25rem;
+	font-size: 0.15rem;
+}
+.publish-img{
+	width: 0.5rem;
+	height: 0.5rem;
+	border-radius: 50%;
+	border: 0.03rem solid royalblue;
+	position: fixed;
+	bottom: 0.2rem;
+	right: 0.3rem;
+}

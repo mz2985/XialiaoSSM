@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/publish.css"/>
+	</head>
+	<body>
+		<form id="form_file" enctype="multipart/form-data">
+			<div class="head">
+				<a href="home.html" class="cancle">取消</a>
+				<p class="title">瞎聊几句</p>
+				<a class="publish" id="publish">发表</a>
+			</div>
+			<div class="publish-content">
+				<textarea class="publish-content-txt" id="publish-content-txt"  maxlength="50" required="required" placeholder="请输入瞎聊的鲜事"></textarea>
+			</div>
+			
+			<a href="javascript:;" id="a-upload" class="a-upload">
+				<input type="file" required="required" name="publish-content-img" id="publish-content-img" />点击获取图片
+			</a>
+			
+			
+			<div class="pic-show">
+				<img src="img/photo.png" id="pic-show-img">
+			</div>
+			
+		</form>
+	</body>
+	<script src="js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/ajax.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		
+		var input = document.getElementById("publish-content-img").value;
+		var img = document.getElementById("pic-show-img");
+		var imgSrc = "";
+		input.onchange = function(){
+			if(input.value == ""){
+				return alert("不能为空");
+			}
+			// console.log(this.files[0].name);
+			img.src = "img/" + this.files[0].name;
+			imgSrc = "img/"+this.files[0].name;
+		}
+		
+		
+		var publish = document.getElementById("publish");
+		publish.onclick = function(){
+			var publish_content_txt = document.getElementById("publish-content-txt").value;
+			if(publish_content_txt == "" ){
+				return alert("内容不能为空");
+			}
+			
+			var url = "publishServlet";
+			var method = "POST";
+			var data = {
+				"method":"addPublish",
+				"date":new Date().getFullYear()+"-"+(new Date().getMonth()+1),
+				"nickname":sessionStorage.getItem("nickname"),
+				"content_txt":publish_content_txt,
+				"content_img":imgSrc,
+				"sign":new Date().getTime()
+			}
+			var dataType = "text";
+			
+			xmlHttpRequest(url,method,data,dataType,addSuccess);
+		
+		}
+		function addSuccess(data){
+			if (data == "success") {
+				alert("发表成功");
+				window.location.href = "home.html";
+			} else{
+				alert("发表失败");
+			}
+		}8
+		
+	</script>
+</html>

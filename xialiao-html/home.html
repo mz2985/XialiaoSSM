@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/home.css"/>
+	</head>
+	<body>
+		<div class="head">
+			<p class="logout" id="logout">退出登录</p>
+			<img src="img/icon.jpg" class="user-icon" >
+			<p class="nickname" id="nickname">昵称:逗比小王子</p>
+			<div class="navigation">
+				<a id="queryAll" class="on">瞎聊圈</a>
+				<a id="queryNick">我的瞎聊</a>
+			</div>
+		</div>
+		
+		<div class="fart" id="fart">
+			<div class="fart-content">
+				<a id="delete">X</a>
+				<div class="fart-content-user">
+					<img src="img/icon.jpg" class="fart-content-user-icon" >
+					<div>
+						<p class="fart-content-user-name">逗比小王子</p>
+						<p class="fart-content-user-date">2020-09-03</p>
+					</div>
+				</div>
+				<div class="fart-content-publish">
+					<p>好好学习天天向上好好学习天天向上好好学习天天向上好好学习天天向上好好学习天天向上好好学习天天向上好好学习天天向上好好学习天天向上好好学习天天向上</p>
+					<img src="img/0.jpg" />
+				</div>
+			</div>
+			<div class="fart-content">
+				
+			</div>
+		</div>
+		
+		<img src="img/publish.png" class="publish-img" id="publish-img" >
+	</body>
+	<script src="js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/ajax.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		
+		var nickname = document.getElementById("nickname");
+		nickname.innerText = sessionStorage.getItem("nickname");
+		
+		// 获取publish-img 图片标签
+		var publish_img = document.getElementById("publish-img");
+		// 标签添加点击事件
+		publish_img.onclick = function(){
+			window.location.href = "publish.html";
+		}
+		
+		var queryAll = document.getElementById("queryAll");
+		var queryNick = document.getElementById("queryNick");
+		
+		
+		queryAll.onclick = function(){
+			this.className = "on";
+			queryNick.className = "";
+			xmlHttpRequest("getAllPublish","GET",null,"json",getPublishSuccess);
+
+		}
+		queryNick.onclick = function(){
+			this.className = "on";
+			queryAll.className = "";
+			xmlHttpRequest("getNickPublish","GET",{"nickname":sessionStorage.getItem("nickname")},"json",getPublishSuccess);
+
+		}
+		
+		
+		
+		
+		// 获取所有瞎聊数据 当第一次进入home页时 这个操作是主动的
+		xmlHttpRequest("getAllPublish","GET",null,"json",getPublishSuccess);
+		
+		function getPublishSuccess(data){
+			var fart = document.getElementById("fart");
+			if(data.length == 0){
+				fart.innerHTML = "暂无数据";
+			}else{
+				fart.innerHTML = "";
+				for(var i=0;i<data.length;i++){
+					var fart_content = document.createElement("div");
+					fart_content.className = "fart-content";
+					fart.appendChild(fart_content);
+					var a = document.createElement("a");
+					a.id = "delete";
+					a.innerText = "X";
+					a.index = data[i].sign;
+					a.onclick = function(){
+						xmlHttpRequest("deletePublish","GET",{"sign":this.index},"text",deleteSuccess);
+						console.log(this.index);
+					}
+					fart_content.appendChild(a);
+					var fart_content_user = document.createElement("div");
+					fart_content_user.className = "fart-content-user";
+					fart_content.appendChild(fart_content_user);
+					var fart_content_user_icon = document.createElement("img");
+					fart_content_user_icon.className = "fart-content-user-icon";
+					fart_content_user_icon.src = "img/icon.jpg";
+					fart_content_user.appendChild(fart_content_user_icon);
+					var div = document.createElement("div");
+					fart_content_user.appendChild(div);
+					var fart_content_user_name = document.createElement("p");
+					fart_content_user_name.className = "fart-content-user-name";
+					fart_content_user_name.innerText = data[i].nickname;
+					div.appendChild(fart_content_user_name);
+					var fart_content_user_date = document.createElement("p");
+					fart_content_user_date.className= "fart-content-user-date";
+					fart_content_user_date.innerText = data[i].date;
+					div.appendChild(fart_content_user_date);
+					var fart_content_publish = document.createElement("div");
+					fart_content_publish.className = "fart-content-publish";
+					fart_content.appendChild(fart_content_publish);
+					var p = document.createElement("p");
+					p.innerText = data[i].content_txt;
+					fart_content_publish.appendChild(p);
+					var img = document.createElement("img");
+					console.log(typeof  data[i].content_img)
+					img.src = "img/back.jpg";
+					fart_content_publish.appendChild(img);
+				}
+			}
+		}
+		
+		function deleteSuccess(data){
+			if(data == "success"){
+				alert("删除成功")
+				window.location.reload();
+			}else{
+				alert("删除失败");
+			}
+		}
+		
+		var logout = document.getElementById("logout");
+		logout.onclick = function(){
+			sessionStorage.removeItem("nickname");
+			window.location.href = "login.html";
+		}
+		
+		
+			</script>
+	
+</html>
